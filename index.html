@@ -667,9 +667,33 @@ function setupFaviconDrop(){
 }
 
 function exportCode(){
-  const lines=PRODUITS.map(p=>`  /* id:${p.id} – ${p.nom.substring(0,30)} */`);
-  navigator.clipboard.writeText('// Images sauvegardées dans localStorage — clés: si_ID (ou si_ID_variantIndex)').catch(()=>{});
-  showToast('Les images sont déjà sauvegardées automatiquement dans le navigateur');
+  // 1. Cloner toute la page
+  const clone = document.documentElement.cloneNode(true);
+
+  // 2. Supprimer le mode édition (barre jaune etc.)
+  clone.querySelectorAll('.edit-bar, .modal-thumb-add, .logo-drop-zone, .favicon-drop-zone')
+    .forEach(el => el.remove());
+
+  // 3. Récupérer le HTML complet
+  let html = "<!DOCTYPE html>\n" + clone.outerHTML;
+
+  // 4. Créer un fichier téléchargeable
+  const blob = new Blob([html], {type: "text/html"});
+  const url = URL.createObjectURL(blob);
+
+  // 5. Créer un lien temporaire pour télécharger
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "index.html";
+  document.body.appendChild(a);
+  a.click();
+
+  // 6. Nettoyage
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  // 7. Message
+  showToast("✅ Site exporté avec succès !");
 }
 
 let _t;
