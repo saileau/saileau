@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réglages Catamaran — Saileau YCT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#07111F;--navy-2:#0E1E30;--navy-3:#152840;--navy-4:#1C3353;--teal:#3DBDCC;--gold:#C9A044;--white:#EDE9E0;--dim:#B0ADA5;--border:rgba(61,189,204,0.18);--bs:rgba(255,255,255,0.08);--fh:'Cormorant Garamond',serif;--fb:'Outfit',sans-serif;--r:10px;--rl:16px;--tr:0.28s ease}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--white);font-family:var(--fb);font-size:15px;line-height:1.65;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:var(--fb);border:none;background:none}
+input,select,textarea{font-family:var(--fb)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(7,17,31,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--bs)}
+.nav-logo{font-family:var(--fh);font-size:22px;font-weight:600;letter-spacing:.08em}.nav-logo span{color:var(--teal)}
+.nav-tabs{display:flex;gap:.25rem}
+.nav-tab{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding:6px 14px;border-radius:20px;transition:all var(--tr);cursor:pointer}
+.nav-tab:hover{color:var(--white)}.nav-tab.active{background:rgba(61,189,204,0.12);color:var(--teal)}
+.nav-back{font-size:12px;color:var(--dim);padding:6px 12px;border:1px solid var(--bs);border-radius:20px;transition:all var(--tr)}
+.nav-back:hover{color:var(--teal);border-color:var(--border)}
+
+/* LAYOUT */
+.main{padding:80px 5% 60px;max-width:1300px;margin:0 auto}
+.page{display:none}.page.active{display:block}
+
+/* CARDS */
+.card{background:var(--navy-2);border:1px solid var(--bs);border-radius:var(--rl);padding:1.5rem;margin-bottom:1rem}
+.section-title{font-family:var(--fh);font-size:clamp(28px,4vw,42px);font-weight:300;margin-bottom:.5rem}
+.section-title em{font-style:italic;color:var(--teal)}
+.section-sub{font-size:14px;color:var(--dim);margin-bottom:2rem;font-weight:300}
+.label{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.4rem;display:block}
+.label-req::after{content:' *';color:#FF6B6B}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.form-group{display:flex;flex-direction:column}
+.form-group.full{grid-column:1/-1}
+input[type=text],input[type=number],input[type=date],select,textarea{width:100%;padding:9px 12px;background:var(--navy-4);border:1px solid var(--bs);border-radius:var(--r);color:var(--white);font-size:13.5px;outline:none;transition:border-color var(--tr)}
+input:focus,select:focus,textarea:focus{border-color:var(--teal)}
+input:required:invalid{border-color:rgba(255,107,107,.3)}
+select option{background:var(--navy-3);color:var(--white)}
+textarea{min-height:80px;resize:vertical;line-height:1.6}
+.free-input{margin-top:6px}
+.free-input input{font-size:12.5px;padding:7px 10px;color:var(--dim)}
+.free-input input::placeholder{color:rgba(176,173,165,.4)}
+
+/* SLIDER */
+.slider-wrap{display:flex;align-items:center;gap:10px}
+.slider-wrap input[type=range]{flex:1;height:4px;appearance:none;background:var(--navy-4);border:none;border-radius:2px;outline:none;cursor:pointer}
+.slider-wrap input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;background:var(--teal);border-radius:50%;cursor:pointer}
+.slider-val{min-width:44px;text-align:right;font-size:13px;font-weight:500;color:var(--teal)}
+
+/* RÉGLAGES SECTIONS */
+.reglage-section{margin-bottom:1.75rem}
+.reglage-section h4{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--bs)}
+.reglage-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.85rem}
+
+/* DOUBLE SELECT (près / portant) */
+.double-select{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.double-select-label{font-size:11px;color:var(--dim);margin-bottom:3px}
+
+/* DÉRIVE GRID */
+.derive-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.derive-section label.label{color:var(--dim);font-size:10px}
+
+/* ÉTOILES */
+.stars{display:flex;gap:6px;align-items:center}
+.star{font-size:26px;cursor:pointer;color:var(--bs);transition:color var(--tr);user-select:none;line-height:1}
+.star.active{color:var(--gold)}
+.note-required{font-size:11px;color:#FF6B6B;margin-left:6px;display:none}
+
+/* BOUTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:40px;font-size:13.5px;font-weight:500;transition:all var(--tr);cursor:pointer}
+.btn-primary{background:var(--teal);color:var(--navy)}.btn-primary:hover{background:#5ACAD8;transform:translateY(-1px)}
+.btn-outline{border:1px solid var(--bs);color:var(--dim)}.btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+.btn-group{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}
+
+/* TOGGLE PUBLIC/PRIVÉ */
+.privacy-toggle{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;background:var(--navy-3);border-radius:var(--r);cursor:pointer;user-select:none}
+.toggle-switch{width:42px;height:24px;background:var(--navy-4);border-radius:12px;position:relative;transition:background var(--tr);flex-shrink:0}
+.toggle-switch.on{background:var(--teal)}
+.toggle-switch::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform var(--tr)}
+.toggle-switch.on::after{transform:translateX(18px)}
+.privacy-label{font-size:13px;color:var(--dim)}
+.privacy-label strong{color:var(--white);font-weight:500}
+
+/* SESSIONS */
+.sessions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+.session-card{background:var(--navy-3);border:1px solid var(--bs);border-radius:var(--rl);padding:1.25rem;cursor:pointer;transition:all var(--tr);position:relative}
+.session-card:hover{border-color:var(--border);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.session-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem}
+.session-equipe{font-family:var(--fh);font-size:20px;font-weight:400}
+.session-date{font-size:12px;color:var(--dim)}
+.session-badge{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.badge-public{background:rgba(61,189,204,.15);color:var(--teal);border:1px solid var(--border)}
+.badge-private{background:rgba(255,255,255,.05);color:var(--dim);border:1px solid var(--bs)}
+.session-conditions{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem}
+.cond-pill{font-size:11px;padding:3px 9px;background:var(--navy-4);border-radius:20px;color:var(--dim)}
+.session-reglages{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:12px}
+.sr-row{display:flex;justify-content:space-between}
+.sr-key{color:var(--dim)}.sr-val{color:var(--white);font-weight:500}
+.session-note{display:flex;gap:2px;margin-top:.75rem}
+.sn-star{color:var(--gold);font-size:14px}
+.session-actions{position:absolute;top:.75rem;right:.75rem;display:flex;gap:.4rem;opacity:0;transition:opacity var(--tr)}
+.session-card:hover .session-actions{opacity:1}
+.session-actions button{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all var(--tr)}
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--dim)}
+.empty-state p{font-size:14px;margin-top:1rem}
+
+/* VMG */
+.vmg-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.vmg-filter{padding:6px 16px;border:1px solid var(--bs);border-radius:20px;font-size:12px;color:var(--dim);cursor:pointer;transition:all var(--tr)}
+.vmg-filter.active{border-color:var(--teal);color:var(--teal);background:rgba(61,189,204,.08)}
+.vmg-table{overflow-x:auto}
+.vmg-table table{width:100%;border-collapse:collapse;font-size:12.5px}
+.vmg-table th{background:var(--navy-3);padding:.6rem .85rem;text-align:left;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);white-space:nowrap;border-bottom:1px solid var(--bs)}
+.vmg-table td{padding:.55rem .85rem;border-bottom:1px solid rgba(255,255,255,.04);color:var(--dim);white-space:nowrap}
+.vmg-table tr:hover td{background:rgba(255,255,255,.02);color:var(--white)}
+.vmg-allure-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.pres{background:rgba(61,189,204,.15);color:var(--teal)}.spi{background:rgba(201,160,68,.15);color:var(--gold)}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy-3);border:1px solid var(--border);border-radius:40px;padding:10px 22px;font-size:13.5px;z-index:500;opacity:0;transition:all .3s ease;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* LOADING */
+.loading{display:flex;align-items:center;justify-content:center;gap:.75rem;padding:2rem;color:var(--dim);font-size:14px}
+.spinner{width:20px;height:20px;border:2px solid var(--bs);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:0 4%}.nav-tabs{display:none}
+  .main{padding:80px 4% 60px}
+  .form-grid,.reglage-grid{grid-template-columns:1fr}
+  .sessions-grid{grid-template-columns:1fr}
+  .double-select{grid-template-columns:1fr}
+  .derive-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">SAIL<span>EAU</span></a>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showPage('saisir')">📋 Saisir</div>
+    <div class="nav-tab" onclick="showPage('mes-sessions')">📁 Mes sessions</div>
+    <div class="nav-tab" onclick="showPage('communaute')">🌐 Communauté</div>
+    <div class="nav-tab" onclick="showPage('reference')">📊 Référence VMG</div>
+  </div>
+  <a href="index.html" class="nav-back">← Boutique</a>
+</nav>
+
+<div class="main">
+
+<!-- PAGE : SAISIR -->
+<div class="page active" id="page-saisir">
+  <h1 class="section-title">Nouvelle <em>session</em></h1>
+  <p class="section-sub">Renseigne tes réglages après chaque sortie. Les champs marqués <span style="color:#FF6B6B">*</span> sont obligatoires.</p>
+
+  <form id="sessionForm" onsubmit="saveSession(event)" novalidate>
+
+    <!-- INFOS GÉNÉRALES -->
+    <div class="card">
+      <div class="reglage-section">
+        <h4>Informations générales</h4>
+        <div class="form-grid">
+          <div class="form-group">
+            <span class="label">Barreur / Équipier</span>
+            <input type="text" id="f_equipe" placeholder="Prénom, Prénom">
+          </div>
+          <div class="form-group">
+            <span class="label label-req">Numéro de voile</span>
+            <input type="text" id="f_voile" placeholder="Précision libre…">
+          </div>
+          <div class="form-group">
+            <span class="label">Support</span>
+            <select id="f_support">
+              <option value="">— Sélectionner —</option>
+              <option value="Nacra 15">Nacra 15</option>
+              <option value="Nacra 17">Nacra 17</option>
+              <option value="F16">F16</option>
+              <option value="F18">F18</option>
+              <option value="Catamaran">Catamaran (autre)</option>
+              <option value="autre">Autre (préciser ci-dessous)</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_support_libre" placeholder="Précision libre…"></div>
+          </div>
+          <div class="form-group">
+            <span class="label label-req">Date</span>
+            <input type="date" id="f_date">
+          </div>
+          <div class="form-group">
+            <span class="label">Poids équipage (kg)</span>
+            <input type="number" id="f_poids" placeholder="Précision libre…" min="1" max="999" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- CONDITIONS -->
+      <div class="reglage-section">
+        <h4>Conditions</h4>
+        <div class="form-grid">
+          <div class="form-group">
+            <span class="label label-req">Vent min (nœuds)</span>
+            <div class="slider-wrap">
+              <input type="range" id="f_vent_min" min="0" max="40" value="8" oninput="updSlider('f_vent_min','sv_vent_min')">
+              <span class="slider-val" id="sv_vent_min">8</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <span class="label label-req">Vent max (nœuds)</span>
+            <div class="slider-wrap">
+              <input type="range" id="f_vent_max" min="0" max="40" value="12" oninput="updSlider('f_vent_max','sv_vent_max')">
+              <span class="slider-val" id="sv_vent_max">12</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <span class="label label-req">État de mer</span>
+            <select id="f_mer">
+              <option value="">— Sélectionner —</option>
+              <option value="Plat">Plat</option>
+              <option value="Vague légère">Vague légère</option>
+              <option value="Vague formée">Vague formée</option>
+              <option value="Grosse mer">Grosse mer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <span class="label">Gîte au près</span>
+            <select id="f_gite_pres">
+              <option value="">— Sélectionner —</option>
+              <option>Plat</option>
+              <option>Légère</option>
+              <option>Modérée</option>
+              <option>Forte</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <span class="label">Gîte au portant</span>
+            <select id="f_gite_portant">
+              <option value="">— Sélectionner —</option>
+              <option>Plat</option>
+              <option>Légère</option>
+              <option>Modérée</option>
+              <option>Forte</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RÉGLAGES GRÉEMENT -->
+    <div class="card">
+      <div class="reglage-section">
+        <h4>Haubans &amp; guignole</h4>
+        <div class="reglage-grid">
+          <div class="form-group">
+            <span class="label label-req">Tension haubans (kg)</span>
+            <div class="slider-wrap">
+              <input type="range" id="f_haubans" min="60" max="450" value="300" step="5" oninput="updSlider('f_haubans','sv_haubans')">
+              <span class="slider-val" id="sv_haubans">300</span>
+            </div>
+            <div class="free-input" style="margin-top:6px">
+              <input type="number" id="f_haubans_exact" placeholder="Précision libre…" min="1" max="9999" style="font-size:12.5px;padding:7px 10px;color:var(--dim)" inputmode="numeric" oninput="if(this.value){document.getElementById('f_haubans').value=Math.min(450,Math.max(60,this.value));document.getElementById('sv_haubans').textContent=this.value;}">
+            </div>
+          </div>
+          <div class="form-group">
+            <span class="label label-req">Tension guignole (kg)</span>
+            <div class="slider-wrap">
+              <input type="range" id="f_guignole" min="190" max="850" value="300" step="10" oninput="updSlider('f_guignole','sv_guignole')">
+              <span class="slider-val" id="sv_guignole">300</span>
+            </div>
+            <div class="free-input" style="margin-top:6px">
+              <input type="number" id="f_guignole_exact" placeholder="Précision libre…" min="1" max="9999" style="font-size:12.5px;padding:7px 10px;color:var(--dim)" inputmode="numeric" oninput="if(this.value){document.getElementById('f_guignole').value=Math.min(850,Math.max(190,this.value));document.getElementById('sv_guignole').textContent=this.value;}">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reglage-section">
+        <h4>Rotation de mât</h4>
+        <div class="reglage-grid">
+          <div class="form-group">
+            <span class="label">Rotation — Près</span>
+            <select id="f_rot_pres">
+              <option value="">— Sélectionner —</option>
+              <option>Libre</option>
+              <option>Axe chariot GV</option>
+              <option>Axe haubans</option>
+              <option>Centrée</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_rot_pres_libre" placeholder="Précision libre…"></div>
+          </div>
+          <div class="form-group">
+            <span class="label">Rotation — Portant</span>
+            <select id="f_rot_largue">
+              <option value="">— Sélectionner —</option>
+              <option>Libre</option>
+              <option>Axe chariot GV</option>
+              <option>Axe haubans</option>
+              <option>Centrée</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_rot_largue_libre" placeholder="Précision libre…"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reglage-section">
+        <h4>Barre de compression</h4>
+        <div class="reglage-grid">
+          <div class="form-group">
+            <span class="label">Barre de compression</span>
+            <select id="f_barre_comp">
+              <option value="">— Sélectionner —</option>
+              <option>Lâchée</option>
+              <option>Moyen</option>
+              <option>Prise</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_barre_comp_libre" placeholder="Précision libre…"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRANDE VOILE -->
+    <div class="card">
+      <div class="reglage-section">
+        <h4>Grande voile</h4>
+        <div class="reglage-grid">
+          <div class="form-group">
+            <span class="label">Tension lattes</span>
+            <select id="f_lattes">
+              <option value="">— Sélectionner —</option>
+              <option>Lâchées</option>
+              <option>Moyen</option>
+              <option>Prises</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_lattes_libre" placeholder="Précision libre…"></div>
+          </div>
+          <div class="form-group">
+            <span class="label">Bordure</span>
+            <select id="f_bordure">
+              <option value="">— Sélectionner —</option>
+              <option>Lâchée</option>
+              <option>Moyen</option>
+              <option>Prise</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_bordure_libre" placeholder="Précision libre…"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reglage-section">
+        <h4>Chariot GV</h4>
+        <div class="reglage-grid">
+          <div class="form-group">
+            <span class="label">Chariot GV — Près</span>
+            <select id="f_chariot_gv_pres">
+              <option value="">— Sélectionner —</option>
+              <option>Centré</option>
+              <option>5 cm</option>
+              <option>10 cm</option>
+              <option>15 cm</option>
+              <option>+15 cm</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_chariot_gv_pres_libre" placeholder="Précision libre…"></div>
+          </div>
+          <div class="form-group">
+            <span class="label">Chariot GV — Portant</span>
+            <select id="f_chariot_gv_largue">
+              <option value="">— Sélectionner —</option>
+              <option>Centré</option>
+              <option>10 cm</option>
+              <option>20 cm</option>
+              <option>30 cm</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_chariot_gv_largue_libre" placeholder="Précision libre…"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reglage-section">
+        <h4>Cunningham</h4>
+        <div class="reglage-grid">
+          <div class="form-group">
+            <span class="label">Cunningham — Près</span>
+            <select id="f_cunni_pres">
+              <option value="">— Sélectionner —</option>
+              <option>Lâché</option>
+              <option>Moyen</option>
+              <option>Pris</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_cunni_pres_libre" placeholder="Précision libre…"></div>
+          </div>
+          <div class="form-group">
+            <span class="label">Cunningham — Portant</span>
+            <select id="f_cunni_largue">
+              <option value="">— Sélectionner —</option>
+              <option>Lâché</option>
+              <option>Moyen</option>
+              <option>Pris</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_cunni_largue_libre" placeholder="Précision libre…"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOC -->
+    <div class="card">
+      <div class="reglage-section">
+        <h4>Foc</h4>
+        <div class="reglage-grid">
+          <div class="form-group">
+            <span class="label">Chariot foc — Près</span>
+            <select id="f_chariot_foc_pres">
+              <option value="">— Sélectionner —</option>
+              <option>Centré</option>
+              <option>Pris</option>
+              <option>Moyen</option>
+              <option>Ouvert</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_chariot_foc_pres_libre" placeholder="Précision libre…"></div>
+          </div>
+          <div class="form-group">
+            <span class="label">Chariot foc — Portant</span>
+            <select id="f_chariot_foc_largue">
+              <option value="">— Sélectionner —</option>
+              <option>Centré</option>
+              <option>Pris</option>
+              <option>Moyen</option>
+              <option>Ouvert</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_chariot_foc_largue_libre" placeholder="Précision libre…"></div>
+          </div>
+          <div class="form-group">
+            <span class="label">Géométrie foc</span>
+            <select id="f_foc_geo">
+              <option value="">— Sélectionner —</option>
+              <option>Creux reculé</option>
+              <option>Creux avancé</option>
+              <option>Plat</option>
+            </select>
+            <div class="free-input"><input type="text" id="f_foc_geo_libre" placeholder="Précision libre…"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DÉRIVES -->
+    <div class="card">
+      <div class="reglage-section">
+        <h4>Dérives</h4>
+        <div class="derive-grid">
+          <div>
+            <span class="label" style="margin-bottom:.75rem;display:block">Au près</span>
+            <div style="display:flex;flex-direction:column;gap:.6rem">
+              <div class="form-group">
+                <span class="label" style="color:var(--dim);font-size:10px;letter-spacing:.1em">Dérive au vent</span>
+                <select id="f_derive_vent_pres">
+                  <option value="">— Sélectionner —</option>
+                  <option>Baissée</option>
+                  <option>Milieu</option>
+                  <option>Levée</option>
+                </select>
+                <div class="free-input"><input type="text" id="f_derive_vent_pres_libre" placeholder="Précision libre…"></div>
+              </div>
+              <div class="form-group">
+                <span class="label" style="color:var(--dim);font-size:10px;letter-spacing:.1em">Dérive sous le vent</span>
+                <select id="f_derive_sv_pres">
+                  <option value="">— Sélectionner —</option>
+                  <option>Baissée</option>
+                  <option>Milieu</option>
+                  <option>Levée</option>
+                </select>
+                <div class="free-input"><input type="text" id="f_derive_sv_pres_libre" placeholder="Précision libre…"></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class="label" style="margin-bottom:.75rem;display:block">Au portant</span>
+            <div style="display:flex;flex-direction:column;gap:.6rem">
+              <div class="form-group">
+                <span class="label" style="color:var(--dim);font-size:10px;letter-spacing:.1em">Dérive au vent</span>
+                <select id="f_derive_vent_portant">
+                  <option value="">— Sélectionner —</option>
+                  <option>Baissée</option>
+                  <option>Milieu</option>
+                  <option>Levée</option>
+                </select>
+                <div class="free-input"><input type="text" id="f_derive_vent_portant_libre" placeholder="Précision libre…"></div>
+              </div>
+              <div class="form-group">
+                <span class="label" style="color:var(--dim);font-size:10px;letter-spacing:.1em">Dérive sous le vent</span>
+                <select id="f_derive_sv_portant">
+                  <option value="">— Sélectionner —</option>
+                  <option>Baissée</option>
+                  <option>Milieu</option>
+                  <option>Levée</option>
+                </select>
+                <div class="free-input"><input type="text" id="f_derive_sv_portant_libre" placeholder="Précision libre…"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTE & RESSENTI -->
+    <div class="card">
+      <div class="reglage-section">
+        <h4>Évaluation</h4>
+        <div class="form-grid">
+          <div class="form-group">
+            <span class="label label-req">Note globale</span>
+            <div class="stars" id="starsInput">
+              <span class="star" onclick="setNote(1)">★</span>
+              <span class="star" onclick="setNote(2)">★</span>
+              <span class="star" onclick="setNote(3)">★</span>
+              <span class="star" onclick="setNote(4)">★</span>
+              <span class="star" onclick="setNote(5)">★</span>
+              <span class="note-required" id="noteRequired">Obligatoire</span>
+            </div>
+          </div>
+          <div class="form-group full">
+            <span class="label">Ressenti &amp; notes libres</span>
+            <textarea id="f_ressenti" placeholder="Comportement du bateau, points forts, axes d'amélioration, conditions particulières…"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:1rem">
+        <span class="label" style="margin-bottom:.6rem">Confidentialité</span>
+        <div class="privacy-toggle" onclick="togglePrivacy()">
+          <div class="toggle-switch" id="privacyToggle"></div>
+          <div class="privacy-label" id="privacyLabel"><strong>Session privée</strong> — visible uniquement par toi</div>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button type="submit" class="btn btn-primary">Enregistrer la session</button>
+        <button type="button" class="btn btn-outline" onclick="resetForm()">Réinitialiser</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<!-- PAGE : MES SESSIONS -->
+<div class="page" id="page-mes-sessions">
+  <h1 class="section-title">Mes <em>sessions</em></h1>
+  <p class="section-sub">Toutes tes sessions enregistrées sur cet appareil.</p>
+  <div id="mySessions"><div class="loading"><div class="spinner"></div> Chargement…</div></div>
+</div>
+
+<!-- PAGE : COMMUNAUTÉ -->
+<div class="page" id="page-communaute">
+  <h1 class="section-title">Sessions <em>publiques</em></h1>
+  <p class="section-sub">Réglages partagés par la communauté.</p>
+  <div class="vmg-filters" id="communFilters">
+    <div class="vmg-filter active" onclick="filterCommun('all',this)">Tout</div>
+    <div class="vmg-filter" onclick="filterCommun('2-8',this)">2–8 nœuds</div>
+    <div class="vmg-filter" onclick="filterCommun('8-16',this)">8–16 nœuds</div>
+    <div class="vmg-filter" onclick="filterCommun('16+',this)">16+ nœuds</div>
+    <div class="vmg-filter" onclick="filterCommun('Nacra 15',this)">Nacra 15</div>
+    <div class="vmg-filter" onclick="filterCommun('F18',this)">F18</div>
+  </div>
+  <div id="communSessions"><div class="loading"><div class="spinner"></div> Chargement…</div></div>
+</div>
+
+<!-- PAGE : RÉFÉRENCE VMG -->
+<div class="page" id="page-reference">
+  <h1 class="section-title">Référence <em>VMG</em></h1>
+  <p class="section-sub">Table de réglages conseillés par mode et conditions — Nacra 15, basée sur la fiche YCT.</p>
+  <div class="vmg-filters" id="vmgFilters">
+    <div class="vmg-filter active" onclick="filterVMG('all',this)">Tout</div>
+    <div class="vmg-filter" onclick="filterVMG('Près',this)">Près</div>
+    <div class="vmg-filter" onclick="filterVMG('Spi',this)">Portant / Spi</div>
+  </div>
+  <div class="card"><div class="vmg-table" id="vmgTable"></div></div>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div id="sessionModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px)">
+  <div style="background:var(--navy-2);border:1px solid var(--bs);border-radius:var(--rl);width:min(700px,100%);max-height:90vh;overflow-y:auto;padding:2rem;position:relative">
+    <button onclick="closeModal()" style="position:absolute;top:12px;right:12px;width:30px;height:30px;border:1px solid var(--bs);border-radius:50%;font-size:16px;color:var(--dim);display:flex;align-items:center;justify-content:center">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var SB_URL='https://wbhmvxpolaxznhtmksjf.supabase.co';
+var SB_KEY='sb_publishable_vP-W7FtJUeF274MX0DIBfw_ICm7hLRk';
+
+var USER_TOKEN=localStorage.getItem('saileau_user_token');
+if(!USER_TOKEN){USER_TOKEN='u_'+Math.random().toString(36).substr(2,9)+Date.now().toString(36);localStorage.setItem('saileau_user_token',USER_TOKEN);}
+
+// API
+async function sbFetch(path,opts){
+  opts=opts||{};
+  var headers=Object.assign({'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'return=representation'},opts.headers||{});
+  try{
+    var r=await fetch(SB_URL+'/rest/v1'+path,Object.assign({},opts,{headers:headers}));
+    var data=await r.json().catch(function(){return[];});
+    return{ok:r.ok,data:data,status:r.status};
+  }catch(e){return{ok:false,data:null,error:e.message};}
+}
+
+async function getSessions(myOnly){
+  var filter=myOnly?'?user_token=eq.'+encodeURIComponent(USER_TOKEN):'?is_public=eq.true';
+  filter+='&order=created_at.desc&limit=100';
+  var r=await sbFetch('/sessions'+filter);
+  return r.ok?(Array.isArray(r.data)?r.data:[]):[];
+}
+async function insertSession(data){return await sbFetch('/sessions',{method:'POST',body:JSON.stringify(data)});}
+async function deleteSession(id){return (await sbFetch('/sessions?id=eq.'+id+'&user_token=eq.'+encodeURIComponent(USER_TOKEN),{method:'DELETE'})).ok;}
+async function updatePrivacy(id,isPublic){return (await sbFetch('/sessions?id=eq.'+id+'&user_token=eq.'+encodeURIComponent(USER_TOKEN),{method:'PATCH',body:JSON.stringify({is_public:isPublic})})).ok;}
+
+// NAV
+var currentPage='saisir';
+function showPage(page){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active');});
+  var el=document.getElementById('page-'+page);if(el)el.classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(function(t){if(t.getAttribute('onclick')&&t.getAttribute('onclick').indexOf("'"+page+"'")>=0)t.classList.add('active');});
+  currentPage=page;
+  if(page==='mes-sessions')loadMySessions();
+  if(page==='communaute')loadPublicSessions();
+  if(page==='reference')renderVMG();
+}
+
+// FORM INIT
+var currentNote=0,isPublic=false;
+document.getElementById('f_date').valueAsDate=new Date();
+var sv=localStorage.getItem('saileau_equipe');if(sv)document.getElementById('f_equipe').value=sv;
+var svv=localStorage.getItem('saileau_voile');if(svv)document.getElementById('f_voile').value=svv;
+
+function updSlider(id,valId){document.getElementById(valId).textContent=document.getElementById(id).value;}
+
+function setNote(n){
+  currentNote=n;
+  document.querySelectorAll('#starsInput .star').forEach(function(s,i){s.classList.toggle('active',i<n);});
+  document.getElementById('noteRequired').style.display='none';
+}
+
+function togglePrivacy(){
+  isPublic=!isPublic;
+  document.getElementById('privacyToggle').classList.toggle('on',isPublic);
+  document.getElementById('privacyLabel').innerHTML=isPublic
+    ?'<strong>Session publique</strong> — visible par toute la communauté'
+    :'<strong>Session privée</strong> — visible uniquement par toi';
+}
+
+function v(id){return document.getElementById(id)?document.getElementById(id).value.trim():'';}
+
+function validateForm(){
+  var errs=[];
+  if(!v('f_voile'))errs.push('Numéro de voile');
+  if(!v('f_date'))errs.push('Date');
+  if(!v('f_mer'))errs.push('État de mer');
+  if(!currentNote){errs.push('Note');document.getElementById('noteRequired').style.display='inline';}
+  return errs;
+}
+
+async function saveSession(e){
+  e.preventDefault();
+  var errs=validateForm();
+  if(errs.length){showToast('Champs obligatoires manquants : '+errs.join(', '));return;}
+
+  var support=v('f_support');
+  if(support==='autre'||!support)support=v('f_support_libre')||support;
+  else if(v('f_support_libre'))support=support+' — '+v('f_support_libre');
+
+  var data={
+    user_token:USER_TOKEN,
+    equipe:v('f_equipe'),voile:v('f_voile'),
+    voile_support:support,
+    date_session:v('f_date'),
+    poids_equipage:parseInt(v('f_poids'))||null,
+    vent_min:parseInt(document.getElementById('f_vent_min').value),
+    vent_max:parseInt(document.getElementById('f_vent_max').value),
+    etat_mer:v('f_mer'),
+    gite_pres:v('f_gite_pres'),
+    gite_portant:v('f_gite_portant'),
+    haubans:parseInt(document.getElementById('f_haubans_exact').value||document.getElementById('f_haubans').value),
+    guignole:parseInt(document.getElementById('f_guignole_exact').value||document.getElementById('f_guignole').value),
+    rot_mat_pres:combine('f_rot_pres','f_rot_pres_libre'),
+    rot_mat_largue:combine('f_rot_largue','f_rot_largue_libre'),
+    barre_compression:combine('f_barre_comp','f_barre_comp_libre'),
+    lattes:combine('f_lattes','f_lattes_libre'),
+    bordure:combine('f_bordure','f_bordure_libre'),
+    chariot_gv_pres:combine('f_chariot_gv_pres','f_chariot_gv_pres_libre'),
+    chariot_gv_largue:combine('f_chariot_gv_largue','f_chariot_gv_largue_libre'),
+    cunningham_pres:combine('f_cunni_pres','f_cunni_pres_libre'),
+    cunningham_largue:combine('f_cunni_largue','f_cunni_largue_libre'),
+    chariot_foc_pres:combine('f_chariot_foc_pres','f_chariot_foc_pres_libre'),
+    chariot_foc_largue:combine('f_chariot_foc_largue','f_chariot_foc_largue_libre'),
+    foc_geometrie:combine('f_foc_geo','f_foc_geo_libre'),
+    derive_vent_pres:combine('f_derive_vent_pres','f_derive_vent_pres_libre'),
+    derive_sv_pres:combine('f_derive_sv_pres','f_derive_sv_pres_libre'),
+    derive_vent_portant:combine('f_derive_vent_portant','f_derive_vent_portant_libre'),
+    derive_sv_portant:combine('f_derive_sv_portant','f_derive_sv_portant_libre'),
+    note:currentNote,
+    ressenti:v('f_ressenti'),
+    is_public:isPublic
+  };
+
+  if(data.equipe)localStorage.setItem('saileau_equipe',data.equipe);
+  if(data.voile)localStorage.setItem('saileau_voile',data.voile);
+
+  var btn=e.target.querySelector('[type=submit]');
+  btn.textContent='Enregistrement…';btn.disabled=true;
+  var r=await insertSession(data);
+  btn.textContent='Enregistrer la session';btn.disabled=false;
+
+  if(r.ok){showToast('Session enregistrée !');resetForm();}
+  else{
+    showToast('Erreur : '+(r.data&&r.data.message?r.data.message:'vérifier la connexion Supabase'));
+    console.error('Supabase error:',r);
+  }
+}
+
+function combine(selId,libId){
+  var sel=v(selId),lib=v(libId);
+  if(!sel&&!lib)return null;
+  if(sel&&lib)return sel+' — '+lib;
+  return sel||lib;
+}
+
+function resetForm(){
+  document.getElementById('f_date').valueAsDate=new Date();
+  ['f_poids','f_ressenti'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  ['f_vent_min','f_vent_max'].forEach(function(id,i){document.getElementById(id).value=i===0?8:12;});
+  document.getElementById('sv_vent_min').textContent='8';
+  document.getElementById('sv_vent_max').textContent='12';
+  document.getElementById('f_haubans').value=300;document.getElementById('sv_haubans').textContent='300';document.getElementById('f_haubans_exact').value='';
+  document.getElementById('f_guignole').value=300;document.getElementById('sv_guignole').textContent='300';document.getElementById('f_guignole_exact').value='';
+  document.querySelectorAll('select').forEach(function(s){s.value='';});
+  document.querySelectorAll('.free-input input').forEach(function(i){i.value='';});
+  currentNote=0;setNote(0);
+  isPublic=false;
+  document.getElementById('privacyToggle').classList.remove('on');
+  document.getElementById('privacyLabel').innerHTML='<strong>Session privée</strong> — visible uniquement par toi';
+}
+
+// SESSIONS
+async function loadMySessions(){
+  document.getElementById('mySessions').innerHTML='<div class="loading"><div class="spinner"></div> Chargement…</div>';
+  renderSessionsList('mySessions',await getSessions(true),true);
+}
+
+var allPublicSessions=[];
+async function loadPublicSessions(){
+  document.getElementById('communSessions').innerHTML='<div class="loading"><div class="spinner"></div> Chargement…</div>';
+  allPublicSessions=await getSessions(false);
+  renderSessionsList('communSessions',allPublicSessions,false);
+}
+
+function filterCommun(f,btn){
+  document.querySelectorAll('#communFilters .vmg-filter').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var filtered=allPublicSessions.filter(function(s){
+    if(f==='all')return true;
+    if(f==='2-8')return s.vent_max<=8;
+    if(f==='8-16')return s.vent_min>=8&&s.vent_max<=16;
+    if(f==='16+')return s.vent_min>=16;
+    if(f==='Nacra 15'||f==='F18')return s.voile_support&&s.voile_support.indexOf(f)>=0;
+    return true;
+  });
+  renderSessionsList('communSessions',filtered,false);
+}
+
+function renderSessionsList(cid,sessions,isMine){
+  var el=document.getElementById(cid);
+  if(!sessions.length){
+    el.innerHTML='<div class="empty-state"><p>'+(isMine?'Aucune session enregistrée.<br>Commence par saisir ta première sortie !':'Aucune session publique pour l\'instant.')+'</p></div>';
+    return;
+  }
+  el.innerHTML='<div class="sessions-grid">'+sessions.map(function(s){
+    var stars='';for(var i=1;i<=5;i++)stars+='<span class="sn-star">'+(i<=(s.note||0)?'★':'☆')+'</span>';
+    var isOwn=s.user_token===USER_TOKEN;
+    return '<div class="session-card" onclick="openSession(\''+s.id+'\')">'+
+      '<div class="session-header">'+
+      '<div><div class="session-equipe">'+(s.equipe||'Anonyme')+'</div>'+
+      '<div class="session-date">'+formatDate(s.date_session)+(s.voile?' · Voile '+s.voile:'')+(s.voile_support?' · '+s.voile_support:'')+'</div></div>'+
+      '<span class="session-badge '+(s.is_public?'badge-public':'badge-private')+'">'+(s.is_public?'🌐 Public':'🔒 Privé')+'</span>'+
+      '</div>'+
+      '<div class="session-conditions">'+
+      '<span class="cond-pill">💨 '+s.vent_min+'–'+s.vent_max+' nds</span>'+
+      '<span class="cond-pill">'+(s.etat_mer||'')+'</span>'+
+      (s.poids_equipage?'<span class="cond-pill">⚖️ '+s.poids_equipage+' kg</span>':'')+
+      '</div>'+
+      '<div class="session-reglages">'+
+      '<div class="sr-row"><span class="sr-key">Haubans</span><span class="sr-val">'+(s.haubans||'—')+' kg</span></div>'+
+      '<div class="sr-row"><span class="sr-key">Guignole</span><span class="sr-val">'+(s.guignole||'—')+' kg</span></div>'+
+      '<div class="sr-row"><span class="sr-key">Lattes</span><span class="sr-val">'+short(s.lattes)+'</span></div>'+
+      '<div class="sr-row"><span class="sr-key">Chariot foc P</span><span class="sr-val">'+short(s.chariot_foc_pres)+'</span></div>'+
+      '</div>'+
+      (s.note?'<div class="session-note">'+stars+'</div>':'')+
+      (isOwn?'<div class="session-actions">'+
+        '<button title="Visibilité" onclick="event.stopPropagation();togglePub(\''+s.id+'\','+!s.is_public+')" style="background:rgba(61,189,204,.1);color:var(--teal)">'+(s.is_public?'🔒':'🌐')+'</button>'+
+        '<button title="Supprimer" onclick="event.stopPropagation();delSession(\''+s.id+'\',this)" style="background:rgba(255,107,107,.1);color:#FF6B6B">🗑</button>'+
+        '</div>':'')+
+      '</div>';
+  }).join('')+'</div>';
+}
+
+function short(v){if(!v)return '—';return v.length>14?v.substring(0,14)+'…':v;}
+function formatDate(d){if(!d)return '';var p=d.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+
+// MODAL
+async function openSession(id){
+  var all=[...await getSessions(true),...await getSessions(false)];
+  var s=all.find(function(x){return x.id===id;});
+  if(!s)return;
+  var stars='';for(var i=1;i<=5;i++)stars+='<span style="color:'+(i<=(s.note||0)?'var(--gold)':'var(--bs)')+'">★</span>';
+  var rows=[
+    ['Équipe',s.equipe],['Voile',s.voile],['Support',s.voile_support],['Date',formatDate(s.date_session)],['Poids équipage',s.poids_equipage?s.poids_equipage+' kg':null],
+    ['—',''],['Vent',s.vent_min+'–'+s.vent_max+' nœuds'],['Mer',s.etat_mer],
+    ['Gîte au près',s.gite_pres],['Gîte au portant',s.gite_portant],
+    ['—',''],
+    ['Haubans',s.haubans?s.haubans+' kg':null],['Guignole',s.guignole?s.guignole+' kg':null],
+    ['Rotation mat — Près',s.rot_mat_pres],['Rotation mat — Portant',s.rot_mat_largue],
+    ['Barre compression',s.barre_compression],
+    ['—',''],
+    ['Lattes',s.lattes],['Bordure',s.bordure],
+    ['Chariot GV — Près',s.chariot_gv_pres],['Chariot GV — Portant',s.chariot_gv_largue],
+    ['Cunningham — Près',s.cunningham_pres],['Cunningham — Portant',s.cunningham_largue],
+    ['—',''],
+    ['Chariot foc — Près',s.chariot_foc_pres],['Chariot foc — Portant',s.chariot_foc_largue],
+    ['Géométrie foc',s.foc_geometrie],
+    ['—',''],
+    ['Dérive vent — Près',s.derive_vent_pres],['Dérive SV — Près',s.derive_sv_pres],
+    ['Dérive vent — Portant',s.derive_vent_portant],['Dérive SV — Portant',s.derive_sv_portant],
+  ];
+  var rowsHtml=rows.map(function(r){
+    if(r[0]==='—')return '<tr><td colspan="2" style="padding:.25rem 0;border:none"><hr style="border-color:var(--bs)"></td></tr>';
+    if(!r[1])return '';
+    return '<tr><td style="padding:.4rem .75rem .4rem 0;color:var(--dim);font-size:13px;width:50%">'+r[0]+'</td><td style="padding:.4rem 0;font-size:13px;font-weight:500">'+r[1]+'</td></tr>';
+  }).join('');
+  document.getElementById('modalContent').innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem">'+
+    '<div><div style="font-family:var(--fh);font-size:28px">'+(s.equipe||'Anonyme')+'</div>'+
+    '<div style="font-size:13px;color:var(--dim)">'+formatDate(s.date_session)+(s.voile?' · Voile '+s.voile:'')+'</div></div>'+
+    '<span class="session-badge '+(s.is_public?'badge-public':'badge-private')+'">'+(s.is_public?'🌐 Public':'🔒 Privé')+'</span>'+
+    '</div>'+
+    '<table style="width:100%;border-collapse:collapse">'+rowsHtml+'</table>'+
+    (s.note?'<div style="margin-top:1rem">'+stars+'</div>':'')+
+    (s.ressenti?'<div style="margin-top:1rem;padding:1rem;background:var(--navy-3);border-radius:var(--r);font-size:13.5px;color:var(--dim);line-height:1.7">'+s.ressenti+'</div>':'');
+  document.getElementById('sessionModal').style.display='flex';
+}
+function closeModal(){document.getElementById('sessionModal').style.display='none';}
+document.getElementById('sessionModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+async function togglePub(id,makePublic){
+  if(await updatePrivacy(id,makePublic)){
+    showToast(makePublic?'Session rendue publique':'Session rendue privée');
+    if(currentPage==='mes-sessions')loadMySessions();
+    if(currentPage==='communaute')loadPublicSessions();
+  }
+}
+async function delSession(id,btn){
+  if(!confirm('Supprimer cette session ?'))return;
+  if(await deleteSession(id)){showToast('Session supprimée');loadMySessions();}
+}
+
+// VMG RÉFÉRENCE
+var VMG_DATA=[
+  {mode:'VMG 1',allure:'Près',vent:'2–5',mer:'Plat',haubans:'300',guignole:'280',lattes:'Lâchées',bordure:'Lâchée',chariot_gv:'Max choqué',foc:'Ouvert',cunni:'Lâché',derive_v:'Levée',derive_sv:'Baissée',note:'Doux — phases lissées'},
+  {mode:'VMG 2',allure:'Près',vent:'6–11',mer:'Plat',haubans:'300',guignole:'300',lattes:'Moyen',bordure:'Moyen',chariot_gv:'10–15 cm',foc:'Moyen',cunni:'Moyen',derive_v:'Levée',derive_sv:'Baissée',note:'Progressif + vitesse'},
+  {mode:'VMG 2\'',allure:'Près',vent:'6–11',mer:'Vague légère',haubans:'300',guignole:'300',lattes:'Moyen',bordure:'Moyen',chariot_gv:'10 cm',foc:'Moyen',cunni:'Moyen',derive_v:'Levée',derive_sv:'Baissée',note:'Adapter gîte au clapot'},
+  {mode:'VMG 3',allure:'Près',vent:'12–16',mer:'Plat',haubans:'320',guignole:'450+',lattes:'Prises',bordure:'Prise',chariot_gv:'Centré',foc:'Pris',cunni:'Pris',derive_v:'Milieu',derive_sv:'Baissée',note:'Cunni = manette de vitesse'},
+  {mode:'Surpuissance',allure:'Près',vent:'16+',mer:'Vagues',haubans:'380+',guignole:'650+',lattes:'Prises',bordure:'Prise',chariot_gv:'Centré',foc:'Pris',cunni:'Pris',derive_v:'Milieu',derive_sv:'Baissée',note:'Vriller foc si vagues'},
+  {mode:'VMG 1',allure:'Spi',vent:'2–5',mer:'Plat',haubans:'300',guignole:'280',lattes:'Lâchées',bordure:'Lâchée',chariot_gv:'30 cm',foc:'Ouvert',cunni:'Lâché',derive_v:'Baissée',derive_sv:'Baissée',note:'Doux — glisse'},
+  {mode:'VMG 2',allure:'Spi',vent:'6–11',mer:'Plat',haubans:'300',guignole:'300',lattes:'Moyen',bordure:'Moyen',chariot_gv:'20–30 cm',foc:'Ouvert',cunni:'Lâché',derive_v:'Baissée',derive_sv:'Baissée',note:'Surf actif — reloffés 40°'},
+  {mode:'VMG 3',allure:'Spi',vent:'12–16',mer:'Plat',haubans:'320',guignole:'450+',lattes:'Prises',bordure:'Prise',chariot_gv:'10–20 cm',foc:'Ouvert',cunni:'Lâché',derive_v:'Baissée',derive_sv:'Baissée',note:'Instable — vent apparent max'},
+  {mode:'Surpuissance',allure:'Spi',vent:'16+',mer:'Vagues',haubans:'380+',guignole:'650+',lattes:'Prises',bordure:'Prise',chariot_gv:'10 cm',foc:'Ouvert',cunni:'Lâché',derive_v:'Levée',derive_sv:'Baissée',note:'Gestion pitch'},
+];
+
+var vmgFilter='all';
+function filterVMG(f,btn){
+  vmgFilter=f;
+  document.querySelectorAll('#vmgFilters .vmg-filter').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');renderVMG();
+}
+function renderVMG(){
+  var data=VMG_DATA.filter(function(r){
+    if(vmgFilter==='all')return true;
+    if(vmgFilter==='Spi')return r.allure==='Spi';
+    return r.allure===vmgFilter;
+  });
+  var cols=['Mode','Allure','Vent','Mer','Haubans','Guignole','Lattes','Bordure','Chariot GV','Foc','Cunni','Dérive vent','Dérive SV','Notes'];
+  var keys=['mode','allure','vent','mer','haubans','guignole','lattes','bordure','chariot_gv','foc','cunni','derive_v','derive_sv','note'];
+  var html='<table><thead><tr>'+cols.map(function(c){return '<th>'+c+'</th>';}).join('')+'</tr></thead><tbody>';
+  data.forEach(function(r){
+    html+='<tr>'+keys.map(function(k){
+      if(k==='vent')return '<td style="font-weight:500;color:var(--white)">'+r[k]+' nds</td>';
+      if(k==='allure')return '<td><span class="vmg-allure-badge '+(r[k]==='Près'?'pres':'spi')+'">'+r[k]+'</span></td>';
+      if(k==='haubans'||k==='guignole')return '<td style="font-weight:500;color:var(--white)">'+r[k]+' kg</td>';
+      return '<td>'+(r[k]||'—')+'</td>';
+    }).join('')+'</tr>';
+  });
+  html+='</tbody></table>';
+  document.getElementById('vmgTable').innerHTML=html;
+}
+
+// TOAST
+var _toast;
+function showToast(msg){
+  var el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(_toast);_toast=setTimeout(function(){el.classList.remove('show');},2800);
+}
+
+renderVMG();
+</script>
+</body>
+</html>
