@@ -495,8 +495,8 @@ textarea{min-height:80px;resize:vertical;line-height:1.6}
 // ============================================================
 var SB = 'https://wbhmvxpolaxznhtmksjf.supabase.co';
 var KEY = 'sb_publishable_vP-W7FtJUeF274MX0DIBfw_ICm7hLRk';
-var VMG_CODE = 'saileau2026yct';
-var ADMIN_CODE = 'Terminatorsyp83';
+var VMG_CODE = 'a0bfa1b551346076e92a3bdeb58844792ee81fd0518776c4845849fbb3635b4b';
+var ADMIN_CODE = '4e7b509a78ad56d99f70beeb8e732da3e70f126faed44fd99a0db0ff49728bfa';
 
 var TOKEN = localStorage.getItem('r_token');
 if (!TOKEN) { TOKEN = 'u_' + Math.random().toString(36).substr(2,9) + Date.now().toString(36); localStorage.setItem('r_token', TOKEN); }
@@ -808,8 +808,11 @@ function renderVMG(){
 // ============================================================
 function openVmgModal(){ document.getElementById('vmgModal').style.display='flex'; setTimeout(function(){document.getElementById('vmgCode').focus();},100); }
 function closeVmgModal(){ document.getElementById('vmgModal').style.display='none'; }
-function checkVmg(){
-  if(document.getElementById('vmgCode').value===VMG_CODE){
+async function checkVmg(){
+  var encoded=new TextEncoder().encode(document.getElementById('vmgCode').value);
+  var buf=await crypto.subtle.digest('SHA-256',encoded);
+  var hash=Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
+  if(hash===VMG_CODE){
     vmgOk=true; sessionStorage.setItem('r_vmg','1');
     closeVmgModal();
     document.getElementById('vmgCode').value='';
@@ -829,8 +832,11 @@ function showAdminMenu(){
   document.getElementById('adminModal').style.display='flex';
   setTimeout(function(){document.getElementById('adminCode').focus();},100);
 }
-function checkAdmin(){
-  if(document.getElementById('adminCode').value===ADMIN_CODE){
+async function checkAdmin(){
+  var encoded=new TextEncoder().encode(document.getElementById('adminCode').value);
+  var buf=await crypto.subtle.digest('SHA-256',encoded);
+  var hash=Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
+  if(hash===ADMIN_CODE){
     isAdmin=true; sessionStorage.setItem('r_admin','1');
     document.getElementById('adminModal').style.display='none';
     document.getElementById('adminBtn').style.display='block';
