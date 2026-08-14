@@ -1,0 +1,617 @@
+[
+ {
+  "id": 1,
+  "slug": "cache-ecrou-ridoire-staymaster",
+  "nom": "Cache pour écrou de ridoire — type Staymaster",
+  "titre_seo": "Cache écrou de ridoire Staymaster en TPU souple",
+  "court": "Remplace la pièce métallique d'origine. Souple, incassable, résistant à l'eau et aux UV. Imprimé en TPU.",
+  "desc": [
+   "Ce cache remplace la pièce métallique d'origine, souvent introuvable, qui a tendance à se plier, à déchirer les combinaisons ou à abîmer les boudins des semi-rigides d'entraîneur.",
+   "Imprimé en TPU, il est souple, incassable et résistant à l'eau comme aux UV. Il permet de brider l'écrou facilement, sans risque de blessure ni de dégradation du matériel.",
+   "Il s'installe aussi bien par-dessus que par-dessous la ridoire."
+  ],
+  "specs": [
+   [
+    "Matière",
+    "TPU (polyuréthane thermoplastique)"
+   ],
+   [
+    "Poids",
+    "6,79 g"
+   ],
+   [
+    "Conditionnement",
+    "Vendu par paire"
+   ],
+   [
+    "Résistance",
+    "Eau de mer, UV"
+   ]
+  ],
+  "prix": 12,
+  "unite": "paire",
+  "cat": "impression3d",
+  "dispo": true,
+  "variants": null,
+  "imgs": [
+   {
+    "src": "assets/img/produits/cache-ecrou-ridoire-staymaster-1.jpg",
+    "w": 1400,
+    "h": 933
+   },
+   {
+    "src": "assets/img/produits/cache-ecrou-ridoire-staymaster-2.jpg",
+    "w": 933,
+    "h": 1400
+   },
+   {
+    "src": "assets/img/produits/cache-ecrou-ridoire-staymaster-3.jpg",
+    "w": 1400,
+    "h": 933
+   }
+  ]
+ },
+ {
+  "id": 2,
+  "slug": "cache-poulie-winch-harken-57c",
+  "nom": "Cache poulie winch — Harken 57C",
+  "titre_seo": "Cache poulie winch pour Harken 57C — catamaran et dériveur",
+  "court": "Évite que des bouts se coincent dans la poulie ou dans les écoutes de spi. PETG résistant à l'eau, aux chocs et à l'écrasement.",
+  "desc": [
+   "Cache poulie winch spécialement conçu pour les poulies Harken 57C. Il évite que de petits bouts viennent se coincer dans la poulie ou dans les écoutes de spi en fonctionnement.",
+   "Imprimé en PETG, il offre une excellente résistance à l'eau, aux chocs et à l'écrasement. Son profil allégé limite le poids embarqué.",
+   "Conçu pour les écoutes de spi en catamaran, il est adaptable sur demande à d'autres supports (dériveur, WASZP, BirdyFish...)."
+  ],
+  "specs": [
+   [
+    "Matière",
+    "PETG"
+   ],
+   [
+    "Compatibilité",
+    "Harken 57C"
+   ],
+   [
+    "Résistance",
+    "Eau, chocs, écrasement"
+   ],
+   [
+    "Supports",
+    "Catamaran, dériveur, WASZP, BirdyFish..."
+   ],
+   [
+    "Conditionnement",
+    "Vendu par paire"
+   ]
+  ],
+  "prix": 18,
+  "unite": "paire",
+  "cat": "impression3d",
+  "dispo": true,
+  "variants": null,
+  "imgs": [
+   {
+    "src": "assets/img/produits/cache-poulie-winch-harken-57c-1.jpg",
+    "w": 787,
+    "h": 1400
+   },
+   {
+    "src": "assets/img/produits/cache-poulie-winch-harken-57c-2.jpg",
+    "w": 787,
+    "h": 1400
+   },
+   {
+    "src": "assets/img/produits/cache-poulie-winch-harken-57c-3.jpg",
+    "w": 787,
+    "h": 1400
+   },
+   {
+    "src": "assets/img/produits/cache-poulie-winch-harken-57c-4.jpg",
+    "w": 787,
+    "h": 1400
+   },
+   {
+    "src": "assets/img/produits/cache-poulie-winch-harken-57c-5.jpg",
+    "w": 787,
+    "h": 1400
+   }
+  ]
+ },
+ {
+  "id": 3,
+  "slug": "poulie-16mm-bout-5mm",
+  "nom": "Petite poulie 16 mm — pour bout de 5 mm",
+  "titre_seo": "Petite poulie 16 mm inox 316 pour bout 5 mm",
+  "court": "Corps inox 316 et nylon, roulement à billes inox 316. Idéale pour les renvois et les systèmes de raval mou.",
+  "desc": [
+   "Petite poulie de 16 mm, pour bout de 5 mm, avec un corps en acier inoxydable 316 et en nylon, équipée d'un roulement à billes également en acier inoxydable 316.",
+   "Idéale pour tous les petits systèmes : renvois, systèmes de raval mou, montages légers soumis à des efforts modérés."
+  ],
+  "specs": [
+   [
+    "Diamètre",
+    "16 mm"
+   ],
+   [
+    "Bout",
+    "5 mm maximum"
+   ],
+   [
+    "Corps",
+    "Inox 316 + nylon"
+   ],
+   [
+    "Roulement",
+    "Billes inox 316"
+   ]
+  ],
+  "prix": 11,
+  "unite": "",
+  "cat": "accastillage",
+  "dispo": true,
+  "variants": null,
+  "imgs": [
+   {
+    "src": "assets/img/produits/poulie-16mm-bout-5mm-1.jpg",
+    "w": 787,
+    "h": 1400
+   },
+   {
+    "src": "assets/img/produits/poulie-16mm-bout-5mm-2.jpg",
+    "w": 787,
+    "h": 1400
+   },
+   {
+    "src": "assets/img/produits/poulie-16mm-bout-5mm-3.jpg",
+    "w": 787,
+    "h": 1400
+   },
+   {
+    "src": "assets/img/produits/poulie-16mm-bout-5mm-4.jpg",
+    "w": 1400,
+    "h": 933
+   }
+  ]
+ },
+ {
+  "id": 4,
+  "slug": "cale-rake-wing-foil-boitier-us",
+  "nom": "Cale de rake wing foil — boîtier US",
+  "titre_seo": "Cale de rake wing foil boîtier US — 1° à 6°",
+  "court": "Profil hydrodynamique optimisé, supprime la marche entre le foil et la planche. Angles de 1° à 6° selon votre réglage.",
+  "desc": [
+   "Cale de rake spécialement conçue pour le wing foil, compatible avec les boîtiers US. Elle améliore les performances et la glisse, notamment en wing race.",
+   "Son profil hydrodynamique supprime la marche entre l'avant du foil et la planche, pour une transition fluide.",
+   "Imprimée en PETG, elle résiste à l'eau, au sel et à des contraintes mécaniques importantes. Disponible de 1° à 6° : précisez l'angle souhaité lors de la commande."
+  ],
+  "specs": [
+   [
+    "Matière",
+    "PETG"
+   ],
+   [
+    "Compatibilité",
+    "Boîtier US"
+   ],
+   [
+    "Angles",
+    "1° à 6° (sur demande)"
+   ],
+   [
+    "Résistance",
+    "Eau, sel, fortes contraintes"
+   ]
+  ],
+  "prix": 14,
+  "unite": "unité",
+  "cat": "impression3d",
+  "dispo": true,
+  "variants": null,
+  "imgs": [
+   {
+    "src": "assets/img/produits/cale-rake-wing-foil-boitier-us-1.jpg",
+    "w": 1400,
+    "h": 933
+   },
+   {
+    "src": "assets/img/produits/cale-rake-wing-foil-boitier-us-2.jpg",
+    "w": 933,
+    "h": 1400
+   },
+   {
+    "src": "assets/img/produits/cale-rake-wing-foil-boitier-us-3.jpg",
+    "w": 1400,
+    "h": 933
+   },
+   {
+    "src": "assets/img/produits/cale-rake-wing-foil-boitier-us-4.jpg",
+    "w": 1400,
+    "h": 933
+   },
+   {
+    "src": "assets/img/produits/cale-rake-wing-foil-boitier-us-5.jpg",
+    "w": 1400,
+    "h": 933
+   }
+  ]
+ },
+ {
+  "id": 5,
+  "slug": "cle-serrage-vis-gopro",
+  "nom": "Clé de serrage pour vis GoPro — usage en mer",
+  "titre_seo": "Clé de serrage vis GoPro pour usage marine — PETG",
+  "court": "Compacte (5,1 cm), imprimée en PETG. Résistante au sel, avec passage intégré pour cordon ou mousqueton.",
+  "desc": [
+   "Petite clé de serrage conçue pour les vis GoPro, idéale en milieu marin. Imprimée en PETG, elle résiste à l'eau et au sel.",
+   "Compacte (5,1 cm) et légère, elle dispose d'un passage intégré pour cordon ou mousqueton. Le serrage reste précis même avec les mains mouillées."
+  ],
+  "specs": [
+   [
+    "Matière",
+    "PETG"
+   ],
+   [
+    "Longueur",
+    "5,1 cm"
+   ],
+   [
+    "Résistance",
+    "Eau, sel, milieu marin"
+   ],
+   [
+    "Option",
+    "Passage cordon / mousqueton"
+   ]
+  ],
+  "prix": 4,
+  "unite": "",
+  "cat": "impression3d",
+  "dispo": true,
+  "variants": null,
+  "imgs": [
+   {
+    "src": "assets/img/produits/cle-serrage-vis-gopro-1.jpg",
+    "w": 933,
+    "h": 1400
+   },
+   {
+    "src": "assets/img/produits/cle-serrage-vis-gopro-2.jpg",
+    "w": 1400,
+    "h": 933
+   },
+   {
+    "src": "assets/img/produits/cle-serrage-vis-gopro-3.jpg",
+    "w": 1400,
+    "h": 933
+   },
+   {
+    "src": "assets/img/produits/cle-serrage-vis-gopro-4.jpg",
+    "w": 1400,
+    "h": 933
+   }
+  ]
+ },
+ {
+  "id": 6,
+  "slug": "rondelle-transition-tete-fraisee-wing-foil",
+  "nom": "Rondelle de transition tête fraisée — wing foil",
+  "titre_seo": "Rondelle de transition tête fraisée M6 / M8 pour wing foil",
+  "court": "Pour vis à tête fraisée sur toutes platines. PETG résistant à l'eau et aux UV. Disponible en 4 modèles.",
+  "desc": [
+   "Conçue pour le wing foil, cette rondelle permet d'utiliser des vis à tête fraisée là où une surface plane est nécessaire, et de s'adapter à toutes les platines.",
+   "Imprimée en PETG, elle résiste à l'eau et aux UV. Disponible en 4 modèles : M6 standard, M6 allongée, M8 standard, M8 allongée."
+  ],
+  "specs": [
+   [
+    "Matière",
+    "PETG"
+   ],
+   [
+    "Résistance",
+    "Eau, UV"
+   ],
+   [
+    "Conditionnement",
+    "Lot de 4"
+   ],
+   [
+    "Fabrication",
+    "Sur mesure possible"
+   ]
+  ],
+  "prix": 5,
+  "unite": "lot de 4",
+  "cat": "impression3d",
+  "dispo": true,
+  "variants": [
+   "M6 standard",
+   "M6 allongée",
+   "M8 standard",
+   "M8 allongée"
+  ],
+  "imgs": {
+   "0": [
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-1-1.jpg",
+     "w": 933,
+     "h": 1400
+    },
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-1-2.jpg",
+     "w": 933,
+     "h": 1400
+    },
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-1-3.jpg",
+     "w": 933,
+     "h": 1400
+    }
+   ],
+   "1": [
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-2-1.jpg",
+     "w": 1400,
+     "h": 933
+    },
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-2-2.jpg",
+     "w": 933,
+     "h": 1400
+    },
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-2-3.jpg",
+     "w": 933,
+     "h": 1400
+    },
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-2-4.jpg",
+     "w": 1400,
+     "h": 933
+    },
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-2-5.jpg",
+     "w": 933,
+     "h": 1400
+    }
+   ],
+   "2": [
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-3-1.jpg",
+     "w": 933,
+     "h": 1400
+    },
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-3-2.jpg",
+     "w": 933,
+     "h": 1400
+    },
+    {
+     "src": "assets/img/produits/rondelle-transition-tete-fraisee-wing-foil-3-3.jpg",
+     "w": 933,
+     "h": 1400
+    }
+   ],
+   "3": []
+  }
+ },
+ {
+  "id": 7,
+  "slug": "piece-sur-mesure-impression-3d",
+  "nom": "Pièce sur mesure — impression 3D",
+  "titre_seo": "Pièce nautique sur mesure en impression 3D — devis gratuit",
+  "court": "Un besoin spécifique ? Envoyez vos cotes ou une photo — devis gratuit. Je vous accompagne dans votre projet.",
+  "desc": [
+   "Vous avez un besoin spécifique ou une idée de pièce ? Contactez-moi avec vos cotes, un schéma ou une photo.",
+   "Étudiant en BTS CPRP, je maîtrise la conception CAO et les différents matériaux pour trouver la meilleure solution technique à votre problème.",
+   "Devis gratuit et sans engagement."
+  ],
+  "specs": [
+   [
+    "Devis",
+    "Gratuit et sans engagement"
+   ],
+   [
+    "Matériaux",
+    "TPU, PETG, PLA, ABS, ASA"
+   ],
+   [
+    "Volume maximal",
+    "256 × 256 × 256 mm"
+   ],
+   [
+    "Délai",
+    "Selon complexité"
+   ]
+  ],
+  "prix": 0,
+  "unite": "devis",
+  "cat": "impression3d",
+  "dispo": true,
+  "variants": null,
+  "imgs": [
+   {
+    "src": "assets/img/produits/piece-sur-mesure-impression-3d-1.jpg",
+    "w": 1383,
+    "h": 1399
+   }
+  ]
+ },
+ {
+  "id": 8,
+  "slug": "anneau-friction-gorge-10x7mm",
+  "nom": "Anneau de friction avec gorge — 10 × 7 mm",
+  "titre_seo": "Anneau de friction à gorge 10 × 7 mm inox PTFE",
+  "court": "Anneau de friction compact pour petits systèmes. Gorge intégrée pour œil épissé, revêtement PTFE faible friction.",
+  "desc": [
+   "Anneau de friction compact, conçu pour les petits systèmes nécessitant fiabilité et fluidité. Avec ses dimensions de 10 × 7 mm, il est adapté aux cordages jusqu'à environ Ø 5 à 6 mm.",
+   "Sa gorge intégrée permet une fixation propre et sécurisée, notamment avec un œil épissé, pour une intégration optimale dans vos montages.",
+   "Fabriqué en acier inoxydable avec un revêtement PTFE, il offre une excellente résistance à l'abrasion tout en limitant l'usure des cordages. Ce traitement permet une glisse fluide, idéale pour les systèmes de raval mou, les renvois ou les montages légers soumis à contrainte.",
+   "Très léger et discret, il s'intègre parfaitement sur des montages en catamaran ou sur d'autres supports nautiques."
+  ],
+  "specs": [
+   [
+    "Matière",
+    "Acier inoxydable, revêtement PTFE"
+   ],
+   [
+    "Dimensions",
+    "10 × 7 mm"
+   ],
+   [
+    "Compatibilité",
+    "Cordages jusqu'à Ø 5–6 mm"
+   ],
+   [
+    "Fixation",
+    "Œil épissé / épissures"
+   ],
+   [
+    "Propriétés",
+    "Faible friction, résistance à l'abrasion"
+   ],
+   [
+    "Poids",
+    "5 g"
+   ]
+  ],
+  "prix": 9,
+  "unite": "",
+  "cat": "accastillage",
+  "dispo": true,
+  "variants": null,
+  "imgs": [
+   {
+    "src": "assets/img/produits/anneau-friction-gorge-10x7mm-1.jpg",
+    "w": 920,
+    "h": 1146
+   },
+   {
+    "src": "assets/img/produits/anneau-friction-gorge-10x7mm-2.jpg",
+    "w": 920,
+    "h": 1145
+   },
+   {
+    "src": "assets/img/produits/anneau-friction-gorge-10x7mm-3.jpg",
+    "w": 1400,
+    "h": 933
+   }
+  ]
+ },
+ {
+  "id": 9,
+  "slug": "anneau-friction-20mm",
+  "nom": "Anneau de friction — 20 mm",
+  "titre_seo": "Anneau de friction inox 20 mm pour cordage Ø 6 mm",
+  "court": "Anneau de friction simple et efficace pour petits montages. Diamètre extérieur 20 mm, cordages jusqu'à Ø 6 mm.",
+  "desc": [
+   "Anneau de friction simple et efficace, conçu pour les petits montages nécessitant légèreté et fiabilité. Avec un diamètre extérieur de 20 mm, il permet le passage de cordages jusqu'à Ø 6 mm.",
+   "Fabriqué en acier inoxydable, il offre une bonne résistance à l'usure et aux contraintes mécaniques, tout en garantissant une glisse adaptée aux systèmes légers.",
+   "Son design minimaliste en fait une solution robuste et polyvalente pour de nombreux montages : raval mou, petits renvois ou systèmes simples."
+  ],
+  "specs": [
+   [
+    "Matière",
+    "Acier inoxydable"
+   ],
+   [
+    "Diamètre extérieur",
+    "20 mm"
+   ],
+   [
+    "Compatibilité",
+    "Cordages jusqu'à Ø 6 mm"
+   ],
+   [
+    "Utilisation",
+    "Raval mou, renvois, petits systèmes"
+   ],
+   [
+    "Poids",
+    "2 g"
+   ]
+  ],
+  "prix": 1.5,
+  "unite": "",
+  "cat": "accastillage",
+  "dispo": true,
+  "variants": null,
+  "imgs": [
+   {
+    "src": "assets/img/produits/anneau-friction-20mm-1.jpg",
+    "w": 920,
+    "h": 1145
+   },
+   {
+    "src": "assets/img/produits/anneau-friction-20mm-2.jpg",
+    "w": 1400,
+    "h": 933
+   }
+  ]
+ },
+ {
+  "id": 10,
+  "slug": "sifflet-plat",
+  "nom": "Sifflet plat",
+  "titre_seo": "Sifflet plat imprimé en 3D pour la voile",
+  "court": "Sifflet plat imprimé en PETG, compact et léger, à garder sur soi sur l'eau.",
+  "desc": [
+   "Sifflet plat imprimé en PETG : compact, léger et facile à glisser dans une poche de brassière ou à fixer sur un cordon.",
+   "Conçu pour être gardé en permanence sur soi lors des sorties sur l'eau."
+  ],
+  "specs": [
+   [
+    "Matière",
+    "PETG"
+   ],
+   [
+    "Format",
+    "Plat, compact"
+   ]
+  ],
+  "prix": 4,
+  "unite": "unité",
+  "cat": "impression3d",
+  "dispo": true,
+  "variants": null,
+  "imgs": [
+   {
+    "src": "assets/img/produits/sifflet-plat-1.jpg",
+    "w": 1400,
+    "h": 933
+   }
+  ]
+ },
+ {
+  "id": 11,
+  "slug": "protection-crochet-trapeze",
+  "nom": "Protection de crochet de ceinture de trapèze",
+  "titre_seo": "Protection de crochet de trapèze en TPU souple",
+  "court": "Protection du crochet de ceinture de trapèze : évite les rayures et les petits impacts sur les coques. Matière flexible, compatible tout type de crochet.",
+  "desc": [
+   "Protection destinée au crochet des ceintures de trapèze, pour éviter les rayures et les petits impacts sur les coques.",
+   "Réalisée en matière flexible, elle se met en place sur tout type de crochet et reste en position pendant la navigation."
+  ],
+  "specs": [
+   [
+    "Matière",
+    "TPU (souple)"
+   ],
+   [
+    "Compatibilité",
+    "Tout type de crochet de trapèze"
+   ]
+  ],
+  "prix": 7,
+  "unite": "unité",
+  "cat": "impression3d",
+  "dispo": true,
+  "variants": null,
+  "imgs": [
+   {
+    "src": "assets/img/produits/protection-crochet-trapeze-1.jpg",
+    "w": 1400,
+    "h": 933
+   }
+  ]
+ }
+]

@@ -1,0 +1,39 @@
+{
+ "_lisez_moi": "Il ne reste qu'un champ à compléter : 'mediateur' (obligatoire dès qu'une vente est conclue avec un particulier). Tant qu'il contient des crochets, il s'affiche en surbrillance dorée sur le site.",
+
+ "site_url": "https://saileau.github.io/saileau",
+ "base_path": "/saileau/",
+ "google_verification": "iHVKEmwAYiuNFhAo7r4o8svlpgAtwquzKE3f32OnTYo",
+
+ "identite": {
+  "nom_legal": "Philémon Savi-Pathier",
+  "adresse": "127 avenue du Port de Plaisance, 83000 Toulon, France",
+  "email": "saileau83@gmail.com",
+  "tel": "06 17 25 95 70",
+  "tel_intl": "+33617259570",
+  "siret": "106 669 005 00014",
+  "ape": "22.29A — Fabrication de pièces techniques à base de matières plastiques",
+  "rcs_extra": "",
+  "assurance": "L'activité exercée par Saileau n'est pas soumise à une obligation légale d'assurance de responsabilité civile professionnelle. Aucune assurance de responsabilité civile professionnelle n'est souscrite à ce jour.",
+  "mediateur": "[Nom du médiateur de la consommation, adresse postale et site web — obligatoire dès lors que des ventes sont conclues avec des particuliers (art. L.616-1 du Code de la consommation). Liste des médiateurs agréés sur economie.gouv.fr, rubrique « médiation de la consommation ».]",
+  "credits_photos": "Saileau — Philémon Savi-Pathier"
+ },
+
+ "vinted": "https://www.vinted.fr/member/3148043187-saileau83",
+ "instagram": "https://www.instagram.com/saileau_",
+ "reseaux_sup": [],
+
+ "produits_accueil": [1, 4, 11, 2, 8, 5],
+
+ "chips": [
+  "Nacra 15 · Compétition",
+  "Wing Foil · Compétition",
+  "Yacht Club de Toulon",
+  "BTS CPRP",
+  "Conception CAO",
+  "TPU · PETG · ABS · ASA",
+  "Petites séries",
+  "Toulon, Var (83)",
+  "Sur mesure"
+ ]
+}
