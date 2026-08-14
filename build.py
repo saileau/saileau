@@ -101,6 +101,7 @@ NAV = f"""<nav>
     <img class="nav-logo-img" src="{u('assets/img/logo-saileau.png')}" alt="Saileau" width="106" height="32" style="display:block">
   </a>
   <ul class="nav-links" id="navLinks">
+    <li><a href="{u('')}" onclick="closeMenu()">Accueil</a></li>
     <li><a href="{u('produits/')}" onclick="closeMenu()">Produits</a></li>
     <li><a href="{u('a-propos/')}" onclick="closeMenu()">À propos</a></li>
     <li><a href="{u('commander/')}" onclick="closeMenu()">Commander</a></li>
