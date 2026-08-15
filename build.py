@@ -56,6 +56,7 @@ for _k, _v in list(V.items()):
 def head(title, desc, path, og_img=None, ld=None, robots='index, follow'):
     canon = full(path)
     img = og_img or u('assets/img/og-saileau.jpg')
+    og_abs = img if img.startswith('http') else SITE.rsplit(BASE.rstrip('/'), 1)[0] + img if BASE != '/' else SITE + img
     ldjson = ''
     if ld:
         ldjson = '\n<script type="application/ld+json">%s</script>' % json.dumps(
@@ -71,19 +72,21 @@ def head(title, desc, path, og_img=None, ld=None, robots='index, follow'):
 <meta name="author" content="Saileau — Toulon, France">
 <link rel="canonical" href="{canon}">
 <meta name="google-site-verification" content="{CFG['google_verification']}">
-<meta property="og:type" content="{'product' if '/produits/' in path and path != 'produits/' else 'website'}">
+<meta property="og:type" content="{'product' if path.startswith('produits/') and path != 'produits/' else 'website'}">
 <meta property="og:site_name" content="Saileau">
 <meta property="og:url" content="{canon}">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
-<meta property="og:image" content="{SITE + img if img.startswith('/') else img}">
+<meta property="og:image" content="{og_abs}">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{e(title)}">
 <meta name="twitter:description" content="{e(desc)}">
-<meta name="twitter:image" content="{SITE + img if img.startswith('/') else img}">
+<meta name="twitter:image" content="{og_abs}">
 <link rel="icon" href="{u('assets/img/favicon.ico')}" sizes="any">
-<link rel="icon" href="{u('assets/img/favicon.png')}" type="image/png" sizes="32x32">
+<link rel="icon" href="{u('assets/img/favicon-144.png')}" type="image/png" sizes="144x144">
+<link rel="icon" href="{u('assets/img/favicon-96.png')}" type="image/png" sizes="96x96">
+<link rel="icon" href="{u('assets/img/favicon-48.png')}" type="image/png" sizes="48x48">
 <link rel="apple-touch-icon" href="{u('assets/img/apple-touch-icon.png')}">
 <meta name="theme-color" content="#07111F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,6 +106,7 @@ NAV = f"""<nav>
   <ul class="nav-links" id="navLinks">
     <li><a href="{u('')}" onclick="closeMenu()">Accueil</a></li>
     <li><a href="{u('produits/')}" onclick="closeMenu()">Produits</a></li>
+    <li><a href="{u('actualites/')}" onclick="closeMenu()">Conseils</a></li>
     <li><a href="{u('a-propos/')}" onclick="closeMenu()">À propos</a></li>
     <li><a href="{u('commander/')}" onclick="closeMenu()">Commander</a></li>
   </ul>
@@ -131,6 +135,7 @@ FOOTER = f"""<footer>
   </div>
   <div class="footer-links">
     <a href="{u('produits/')}">Produits</a>
+    <a href="{u('actualites/')}">Conseils</a>
     <a href="{u('a-propos/')}">À propos</a>
     <a href="{u('commander/')}">Commander</a>
     <a href="{u('mentions-legales/')}">Mentions légales</a>
@@ -169,7 +174,7 @@ def crumb(items):
     out = ['<nav class="breadcrumb" aria-label="Fil d\'Ariane">']
     parts = []
     for i, (label, href) in enumerate(items):
-        parts.append('<a href="%s">%s</a>' % (u(href), e(label)) if href else '<span>%s</span>' % e(label))
+        parts.append('<a href="%s">%s</a>' % (u(href), e(label)) if href is not None else '<span>%s</span>' % e(label))
     out.append('<span>›</span>'.join(parts))
     out.append('</nav>')
     return ''.join(out)
@@ -237,7 +242,7 @@ def build_home():
         "name": "Saileau",
         "description": "Conception et fabrication de pièces nautiques sur mesure : accastillage et pièces imprimées en 3D pour la voile légère, le wingfoil et le catamaran.",
         "url": SITE + '/',
-        "logo": full('assets/img/favicon.png'),
+        "logo": full('assets/img/icon-512.png'),
         "image": full('assets/img/og-saileau.jpg'),
         "email": CFG['identite']['email'],
         "telephone": CFG['identite']['tel_intl'],
@@ -261,7 +266,7 @@ def build_home():
   <div class="hero-bg"></div><div class="hero-grid"></div>
   <div class="hero-content">
     <div class="hero-badge"><span>Accastillage &amp; impression 3D · Toulon</span></div>
-    <h1><img class="hero-logo-img" src="{u('assets/img/logo-saileau.png')}" alt="Saileau — accastillage et pièces nautiques sur mesure à Toulon" width="420" height="127" style="display:block;margin:0 auto"></h1>
+    <h1><img class="hero-logo-img" src="{u('assets/img/logo-saileau.png')}" alt="Saileau" width="420" height="127" style="display:block;margin:0 auto"><span class="sr-only">Saileau — accastillage et pièces nautiques sur mesure à Toulon</span></h1>
     <p class="hero-sub">Pièces sur mesure pour la voile légère, conçues, imprimées et expédiées depuis Toulon.</p>
     <div class="hero-ctas">
       <a href="{u('produits/')}" class="btn-primary"><span>Voir les produits</span></a>
@@ -801,6 +806,218 @@ Date : ……………………</p>
                "Conditions générales de vente", inner, prio='0.4')
 
 
+
+# ================================================================
+#  ARTICLES — /articles/*.md  →  /actualites/<slug>/
+# ================================================================
+
+def md_inline(t):
+    t = html.escape(t, quote=False)
+    t = re.sub(r'!\[([^\]]*)\]\(([^)\s]+)\)',
+               lambda m: '<img src="%s" alt="%s" loading="lazy">' % (
+                   u(m.group(2)) if not m.group(2).startswith('http') else m.group(2), m.group(1)), t)
+    t = re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)',
+               lambda m: '<a href="%s"%s>%s</a>' % (
+                   m.group(2) if m.group(2).startswith(('http', '#')) else u(m.group(2)),
+                   ' target="_blank" rel="noopener"' if m.group(2).startswith('http') else '',
+                   m.group(1)), t)
+    t = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', t)
+    t = re.sub(r'(?<![*\w])\*([^*]+)\*(?!\w)', r'<em>\1</em>', t)
+    t = re.sub(r'`([^`]+)`', r'<code>\1</code>', t)
+    return t
+
+
+def md_to_html(md):
+    """Markdown minimal : titres, paragraphes, listes, citations, images, tableaux simples."""
+    out, buf_ul, buf_ol = [], [], []
+
+    def flush():
+        if buf_ul:
+            out.append('<ul>' + ''.join('<li>%s</li>' % md_inline(x) for x in buf_ul) + '</ul>')
+            buf_ul.clear()
+        if buf_ol:
+            out.append('<ol>' + ''.join('<li>%s</li>' % md_inline(x) for x in buf_ol) + '</ol>')
+            buf_ol.clear()
+
+    for raw in md.split('\n'):
+        line = raw.rstrip()
+        if not line.strip():
+            flush(); continue
+        m = re.match(r'^(#{2,4})\s+(.*)$', line)
+        if m:
+            flush(); n = len(m.group(1))
+            out.append('<h%d>%s</h%d>' % (n, md_inline(m.group(2)), n)); continue
+        if re.match(r'^\s*[-*]\s+', line):
+            buf_ul.append(re.sub(r'^\s*[-*]\s+', '', line)); continue
+        if re.match(r'^\s*\d+[.)]\s+', line):
+            buf_ol.append(re.sub(r'^\s*\d+[.)]\s+', '', line)); continue
+        if line.startswith('>'):
+            flush(); out.append('<blockquote>%s</blockquote>' % md_inline(line.lstrip('> '))); continue
+        if re.match(r'^-{3,}$', line):
+            flush(); out.append('<hr>'); continue
+        flush(); out.append('<p>%s</p>' % md_inline(line))
+    flush()
+    return '\n'.join(out)
+
+
+MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet',
+        'août', 'septembre', 'octobre', 'novembre', 'décembre']
+
+
+def date_fr(iso):
+    d = datetime.date.fromisoformat(iso)
+    return '%d %s %d' % (d.day, MOIS[d.month - 1], d.year)
+
+
+def load_articles():
+    """Lit /articles/*.md. En-tête entre --- puis le contenu Markdown."""
+    d = os.path.join(ROOT, 'articles')
+    arts = []
+    if not os.path.isdir(d):
+        return arts
+    for fn in sorted(os.listdir(d)):
+        if not fn.endswith('.md'):
+            continue
+        txt = open(os.path.join(d, fn), encoding='utf-8').read()
+        m = re.match(r'^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$', txt)
+        if not m:
+            print('  !! en-tête manquant, article ignoré :', fn); continue
+        meta, body = {}, m.group(2)
+        for line in m.group(1).split('\n'):
+            if ':' in line:
+                k, v = line.split(':', 1)
+                meta[k.strip()] = v.strip()
+        if meta.get('publie', 'true').lower() in ('false', 'non', '0'):
+            print('  (brouillon ignoré :', fn + ')'); continue
+        for champ in ('titre', 'description', 'date'):
+            if not meta.get(champ):
+                print('  !! champ "%s" manquant, article ignoré : %s' % (champ, fn)); meta = None; break
+        if not meta:
+            continue
+        meta['slug'] = meta.get('slug') or fn[:-3]
+        meta['produits'] = [x.strip() for x in meta.get('produits', '').split(',') if x.strip()]
+        meta['body'] = body
+        meta['fichier'] = fn
+        arts.append(meta)
+    arts.sort(key=lambda a: a['date'], reverse=True)
+    return arts
+
+
+def build_articles(arts):
+    if not arts:
+        # aucun article publié : on génère quand même la page pour éviter un lien mort,
+        # en noindex tant qu'elle est vide
+        h = head("Conseils & actualités | Saileau",
+                 "Conseils sur les réglages, les matériaux et l'entretien du matériel de voile légère.",
+                 'actualites/', robots='noindex, follow')
+        body = """%s
+<main id="main">
+<div class="page-head">
+  %s
+  <p class="section-label">Le carnet</p>
+  <h1>Conseils &amp; <em>actualités</em></h1>
+  <p class="section-intro">Les premiers articles arrivent bientôt : réglages, choix des matériaux et entretien du matériel.</p>
+  <p style="margin-top:1.5rem"><a href="%s" class="btn-primary"><span>Voir les produits</span></a></p>
+</div>
+</main>
+%s%s%s""" % (NAV, crumb([("Accueil", ""), ("Conseils & actualités", None)]), u('produits/'),
+             FOOTER, CART, FOOT_JS)
+        write('actualites/index.html', h + body, in_sitemap=False)
+        print('  (aucun article publié — page vitrine générée en noindex)')
+        return
+
+    # --- page liste ---
+    liste = ''.join("""<article class="post-card">
+  <a href="%s">
+    %s
+    <div class="post-body">
+      <time datetime="%s">%s</time>
+      <h2>%s</h2>
+      <p>%s</p>
+      <span class="post-more">Lire la suite →</span>
+    </div>
+  </a>
+</article>""" % (u('actualites/%s/' % a['slug']),
+                 '<div class="post-img"><img src="%s" alt="%s" loading="lazy"></div>' % (
+                     u(a['image']), e(a['titre'])) if a.get('image') else '',
+                 a['date'], date_fr(a['date']), e(a['titre']), e(a['description'])) for a in arts)
+
+    ld = [crumb_ld([("Accueil", ""), ("Conseils & actualités", "actualites/")]),
+          {"@context": "https://schema.org", "@type": "Blog",
+           "name": "Conseils & actualités Saileau", "url": full('actualites/'),
+           "inLanguage": "fr-FR",
+           "blogPost": [{"@type": "BlogPosting", "headline": a['titre'],
+                         "datePublished": a['date'],
+                         "url": full('actualites/%s/' % a['slug'])} for a in arts]}]
+    h = head("Conseils & actualités — réglages, matériaux et pièces nautiques | Saileau",
+             "Conseils pratiques sur les réglages, les matériaux et l'entretien du matériel de voile légère, de wing foil et de catamaran, par l'atelier Saileau à Toulon.",
+             'actualites/', ld=ld)
+    body = """%s
+<main id="main">
+<div class="page-head">
+  %s
+  <p class="section-label">Le carnet</p>
+  <h1>Conseils &amp; <em>actualités</em></h1>
+  <p class="section-intro">Réglages, choix des matériaux, entretien du matériel : ce que j'apprends sur l'eau et à l'atelier, partagé ici.</p>
+</div>
+<section style="padding-top:1rem">
+  <div class="posts-grid">%s</div>
+</section>
+</main>
+%s%s%s""" % (NAV, crumb([("Accueil", ""), ("Conseils & actualités", None)]), liste, FOOTER, CART, FOOT_JS)
+    write('actualites/index.html', h + body, prio='0.8', freq='weekly')
+
+    # --- pages articles ---
+    for i, a in enumerate(arts):
+        contenu = md_to_html(a['body'])
+        lies = [p for p in PRODUITS if p['slug'] in a['produits']]
+        bloc_produits = ''
+        if lies:
+            bloc_produits = ('<section class="related"><h2>Les produits concernés</h2>'
+                             '<div class="products-grid">%s</div></section>'
+                             % ''.join(card(p) for p in lies))
+        autres = [x for x in arts if x['slug'] != a['slug']][:2]
+        bloc_autres = ''
+        if autres:
+            bloc_autres = ('<div class="post-nav"><h3>À lire aussi</h3>%s</div>'
+                           % ''.join('<a href="%s">%s</a>' % (u('actualites/%s/' % x['slug']), e(x['titre']))
+                                     for x in autres))
+        img_abs = full(a['image']) if a.get('image') else full('assets/img/og-saileau.jpg')
+        ld = [crumb_ld([("Accueil", ""), ("Conseils & actualités", "actualites/"),
+                        (a['titre'], 'actualites/%s/' % a['slug'])]),
+              {"@context": "https://schema.org", "@type": "BlogPosting",
+               "headline": a['titre'], "description": a['description'],
+               "datePublished": a['date'], "dateModified": a.get('maj', a['date']),
+               "image": img_abs, "inLanguage": "fr-FR",
+               "author": {"@type": "Person", "name": CFG['identite']['nom_legal'].replace('<span class="todo">', '').replace('</span>', '')},
+               "publisher": {"@type": "Organization", "name": "Saileau", "@id": full('#store')},
+               "mainEntityOfPage": full('actualites/%s/' % a['slug'])}]
+        h = head("%s | Saileau" % a['titre'], a['description'],
+                 'actualites/%s/' % a['slug'],
+                 og_img=u(a['image']) if a.get('image') else None, ld=ld)
+        body = """%s
+<main id="main">
+<div class="page-head" style="padding-bottom:0">
+  %s
+  <p class="post-meta"><time datetime="%s">%s</time></p>
+  <h1>%s</h1>
+  <p class="section-intro">%s</p>
+</div>
+<article class="legal article">
+%s
+%s
+</article>
+%s
+</main>
+%s%s%s""" % (NAV,
+             crumb([("Accueil", ""), ("Conseils & actualités", "actualites/"), (a['titre'], None)]),
+             a['date'], date_fr(a['date']), e(a['titre']), e(a['description']),
+             ('<figure class="article-hero"><img src="%s" alt="%s"></figure>'
+              % (u(a['image']), e(a['titre']))) if a.get('image') else '',
+             contenu + bloc_autres, bloc_produits, FOOTER, CART, FOOT_JS)
+        write('actualites/%s/index.html' % a['slug'], h + body, prio='0.7', freq='monthly')
+
+
 # ---------------------------------------------------------------- 7. 404 / robots / sitemap
 
 def build_404():
@@ -844,6 +1061,7 @@ if __name__ == '__main__':
     build_catalogue()
     for p in PRODUITS:
         build_produit(p)
+    build_articles(load_articles())
     build_apropos()
     build_commander()
     build_mentions()

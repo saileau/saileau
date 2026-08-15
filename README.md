@@ -112,3 +112,64 @@ régénère et se publie tout seul en une minute. Aucun outil sur ton PC.
   transmet l'IP des visiteurs (mentionné dans la politique de confidentialité).
   Pour supprimer ce point : télécharger les `.woff2` dans `assets/fonts/` et
   remplacer le `<link>` par une règle `@font-face`.
+
+---
+
+## 7. Favicon dans les résultats Google
+
+Google n'utilise **qu'un seul favicon par nom d'hôte**. Les sous-dossiers ne peuvent pas
+avoir le leur : `saileau.github.io/saileau/` partage donc le favicon de
+`saileau.github.io`. Si aucun dépôt `saileau.github.io` n'existe, la racine renvoie une
+erreur, Google ne trouve pas d'icône et affiche un globe gris à côté du résultat.
+
+Trois façons de régler ça, de la plus simple à la meilleure :
+
+1. **Renommer le dépôt en `saileau.github.io`** (Settings → Repository name). Le site
+   passe à la racine du domaine. Il faut alors changer dans `config.json` :
+   `"site_url": "https://saileau.github.io"` et `"base_path": "/"`, puis relancer
+   `build.py`. Les URL raccourcissent au passage. À faire tant que le site est peu indexé.
+2. **Créer un second dépôt `saileau.github.io`** contenant seulement un `favicon.ico`
+   et une page `index.html` qui redirige vers `/saileau/`. Solution de rattrapage.
+3. **Acheter un nom de domaine** (saileau.fr, ~8 €/an) et le pointer sur GitHub Pages
+   via Settings → Pages → Custom domain. Meilleure option pour l'image de marque et
+   le référencement à long terme.
+
+Dans tous les cas, Google met **plusieurs jours à plusieurs semaines** à mettre à jour
+le favicon des résultats, et le rafraîchit lors de l'exploration de la page d'accueil :
+demander l'indexation de l'accueil dans Search Console accélère les choses.
+
+---
+
+## 8. Écrire un article (page « Conseils & actualités »)
+
+Les articles sont des fichiers Markdown dans le dossier `articles/`. Un fichier = un
+article = une page `/actualites/<nom-du-fichier>/`, avec son titre, sa description,
+son fil d'Ariane et ses données structurées BlogPosting.
+
+`articles/exemple-mode-emploi.md` contient le modèle complet et la syntaxe. Il est en
+`publie: false`, donc jamais mis en ligne : copie-le plutôt que de l'écraser.
+
+### Publier sans rien réuploader
+
+Une fois le workflow GitHub Actions activé (Settings → Pages → Source : **GitHub
+Actions**), la procédure complète tient dans le navigateur, même depuis un téléphone :
+
+1. Sur github.com, ouvre le dossier `articles/`
+2. « Add file » → « Create new file », nomme-le `mon-sujet.md`
+3. Colle l'en-tête et écris le texte
+4. « Commit changes »
+
+Une minute plus tard, l'article est en ligne, il apparaît dans la liste, dans le menu,
+et le `sitemap.xml` est régénéré automatiquement. Pour corriger une faute : ouvre le
+fichier, clique sur le crayon, corrige, valide.
+
+Tant que le workflow n'est pas activé, il faut lancer `build.py` puis pousser les
+fichiers générés, comme pour les produits.
+
+### Ce qui rend un article utile pour le référencement
+
+- Un article = **une question précise** que quelqu'un tape vraiment dans Google
+- 800 à 1500 mots ; en dessous de 500, l'effet est quasi nul
+- Le mot-clé dans le titre, dans la description et dans le premier paragraphe
+- Au moins un lien vers la fiche produit concernée **dans le corps du texte**
+- Mieux vaut un bon article par mois que quatre articles bâclés

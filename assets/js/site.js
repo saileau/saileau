@@ -7,7 +7,7 @@
 
   var CFG = {
     wa: '33617259570',
-    email: 'saileau83@gmail.com',
+    email: 'saileau.prod@gmail.com',
     base: window.SAILEAU_BASE || ''
   };
 
