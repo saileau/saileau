@@ -7,7 +7,7 @@ rubrique, pages légales complètes, sitemap et données structurées.
 
 ## 1. Avant la première mise en ligne — il reste 2 champs
 
-Identité, adresse et SIRET sont déjà renseignés dans `config.json`.
+Identité, adresse et SIRET  sont déjà renseignés dans `config.json`.
 Il reste deux champs entre crochets, qui s'affichent en **surbrillance dorée**
 sur le site tant qu'ils ne sont pas remplis :
 
